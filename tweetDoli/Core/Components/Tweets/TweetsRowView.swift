@@ -78,11 +78,12 @@ struct TweetsRowView: View {
                 
             }
             .padding()
+            .foregroundColor(.gray)
+            
+            Divider()
         
         }
-        .padding()
-        
-        
+
         
     }
 }

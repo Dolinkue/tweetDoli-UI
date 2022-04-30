@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  ExploreView.swift
 //  tweetDoli
 //
 //  Created by Nicolas Dolinkue on 29/04/2022.
@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct ExploreView: View {
     var body: some View {
-        FeedView()
+        Text("ExploreView")
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct ExploreView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ExploreView()
     }
 }
