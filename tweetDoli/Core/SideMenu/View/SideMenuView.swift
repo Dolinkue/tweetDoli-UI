@@ -27,24 +27,26 @@ struct SideMenuView: View {
                     .padding(.vertical)
             }
             .padding(.leading)
-            ForEach(SideMenuViewmodel.allCases, id: \.rawValue) { viewModel in
+            
+            ForEach(SideMenuViewmodel.allCases, id: \.rawValue){ viewModel in
                 
                 if viewModel == .profile {
                     NavigationLink {
                         ProfilleView()
                     } label: {
-                        SideMenuRowView(option: viewModel)
+                        SideMenuOptionRowView(viewModel2: viewModel)
                     }
-                } else if viewModel == .logout {
-                    print("out")
+
+                } else if viewModel == .logout { 
+                    
                 } else {
-                    SideMenuRowView(viewModel: viewModel)
+                    SideMenuOptionRowView (viewModel2: viewModel )
                 }
-                
-               
-                
-            }
-            .padding(.vertical, 4)
+
+           }
+            
+
+            
             Spacer()
         }
         
@@ -58,4 +60,5 @@ struct SideMenuView_Previews: PreviewProvider {
         SideMenuView()
     }
 }
+
 

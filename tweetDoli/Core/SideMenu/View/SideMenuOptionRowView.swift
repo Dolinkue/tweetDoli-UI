@@ -1,23 +1,23 @@
 //
-//  SideMenuRowView.swift
+//  SideMenuOptionRowView.swift
 //  tweetDoli
 //
-//  Created by Nicolas Dolinkue on 01/05/2022.
+//  Created by Nicolas Dolinkue on 02/05/2022.
 //
 
 import SwiftUI
 
-struct SideMenuRowView: View {
+struct SideMenuOptionRowView: View {
     
-    let viewModel: SideMenuViewmodel
+    let viewModel2: SideMenuViewmodel
     
     var body: some View {
         HStack (spacing: 16){
-            Image(systemName: viewModel.imageName)
+            Image(systemName: viewModel2.imageName)
                 .font(.headline)
                 .foregroundColor(.gray)
             
-            Text(viewModel.description)
+            Text(viewModel2.description)
                 .font(.subheadline)
             
             Spacer()
@@ -27,8 +27,8 @@ struct SideMenuRowView: View {
     }
 }
 
-struct SideMenuRowView_Previews: PreviewProvider {
+struct SideMenuOptionRowView_Previews: PreviewProvider {
     static var previews: some View {
-        SideMenuRowView(viewModel: .profile)
+        SideMenuOptionRowView(viewModel2: .profile)
     }
 }
