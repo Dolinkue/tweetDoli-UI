@@ -12,6 +12,7 @@ struct RegistrationView: View {
     @State private var password = ""
     @State private var userName = ""
     @State private var fullName = ""
+    @Environment(\.presentationMode) var presentationMode
     
     
     var body: some View {
@@ -38,9 +39,9 @@ struct RegistrationView: View {
                 
                 CustomInputField(imageName: "envelope", placeholderText: "Email", text: $email)
                 
-                CustomInputField(imageName: "lock", placeholderText: "Username", text: $password)
+                CustomInputField(imageName: "person", placeholderText: "Username", text: $userName)
                 
-                CustomInputField(imageName: "lock", placeholderText: "Full name", text: $password)
+                CustomInputField(imageName: "person", placeholderText: "Full name", text: $fullName)
                 
                 CustomInputField(imageName: "lock", placeholderText: "Password", text: $password)
                 
@@ -67,9 +68,9 @@ struct RegistrationView: View {
 
             Spacer()
             
-            NavigationLink {
-                RegistrationView()
-                    .navigationBarHidden(true)
+            
+            Button {
+                presentationMode.wrappedValue.dismiss()
             } label: {
                 HStack{
                     Text("Already have an account? Sing in")
@@ -80,7 +81,9 @@ struct RegistrationView: View {
                 }
             }
 
-        }
+           }
+
+        
         .ignoresSafeArea()
         .navigationBarHidden(true)
     }
