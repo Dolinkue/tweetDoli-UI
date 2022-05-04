@@ -11,6 +11,8 @@ import Firebase
 @main
 struct tweetDoliApp: App {
     
+    @StateObject var viewModel = AuthViewModel()
+    
     // inicio de Firebase en swiftUI
     init() {
         FirebaseApp.configure()
@@ -19,9 +21,11 @@ struct tweetDoliApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationView{
-//                ContentView()
-                LoginView()
+                ContentView()
+                    
+                
             }
+            .environmentObject(viewModel)
         }
     }
 }
