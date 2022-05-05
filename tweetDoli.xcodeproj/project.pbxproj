@@ -32,6 +32,8 @@
 		6F991D99281F4BB900198BF2 /* UserStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F991D98281F4BB900198BF2 /* UserStatsView.swift */; };
 		6F991D9B28201EBE00198BF2 /* SideMenuOptionRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F991D9A28201EBE00198BF2 /* SideMenuOptionRowView.swift */; };
 		6FCE0C222822FF6C00815E79 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCE0C212822FF6C00815E79 /* AuthViewModel.swift */; };
+		6FCE0C2428244C8A00815E79 /* PhotoSelecterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCE0C2328244C8A00815E79 /* PhotoSelecterView.swift */; };
+		6FCE0C27282455EE00815E79 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCE0C26282455EE00815E79 /* ImagePicker.swift */; };
 		EB45A4FE5473C485DFB815CC /* Pods_tweetDoli.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5DE71A54A23F621E73F79BC /* Pods_tweetDoli.framework */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +64,8 @@
 		6F991D98281F4BB900198BF2 /* UserStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStatsView.swift; sourceTree = "<group>"; };
 		6F991D9A28201EBE00198BF2 /* SideMenuOptionRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuOptionRowView.swift; sourceTree = "<group>"; };
 		6FCE0C212822FF6C00815E79 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
+		6FCE0C2328244C8A00815E79 /* PhotoSelecterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelecterView.swift; sourceTree = "<group>"; };
+		6FCE0C26282455EE00815E79 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		ACFE6929C5C1E4DC142B76DD /* Pods-tweetDoli.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tweetDoli.debug.xcconfig"; path = "Target Support Files/Pods-tweetDoli/Pods-tweetDoli.debug.xcconfig"; sourceTree = "<group>"; };
 		D5DE71A54A23F621E73F79BC /* Pods_tweetDoli.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tweetDoli.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFD0185C40549008BB044920 /* Pods-tweetDoli.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tweetDoli.release.xcconfig"; path = "Target Support Files/Pods-tweetDoli/Pods-tweetDoli.release.xcconfig"; sourceTree = "<group>"; };
@@ -125,6 +129,7 @@
 			children = (
 				6F766B452821BBBA00D423C4 /* LoginView.swift */,
 				6F766B472821BBD200D423C4 /* RegistrationView.swift */,
+				6FCE0C2328244C8A00815E79 /* PhotoSelecterView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -158,6 +163,7 @@
 		6F991D5B281CB68100198BF2 /* tweetDoli */ = {
 			isa = PBXGroup;
 			children = (
+				6FCE0C25282455D200815E79 /* Utils */,
 				6F991D6D281CB6A800198BF2 /* Extensions */,
 				6F991D6C281CB6A500198BF2 /* Model */,
 				6F991D6B281CB69F00198BF2 /* Service */,
@@ -370,6 +376,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		6FCE0C25282455D200815E79 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				6FCE0C26282455EE00815E79 /* ImagePicker.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		964873632BD23DCF4821C11B /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -505,6 +519,7 @@
 				6F991D73281CB74900198BF2 /* FeedView.swift in Sources */,
 				6F991D93281F450400198BF2 /* SideMenuView.swift in Sources */,
 				6F991D5D281CB68100198BF2 /* tweetDoliApp.swift in Sources */,
+				6FCE0C2428244C8A00815E79 /* PhotoSelecterView.swift in Sources */,
 				6F991D87281CD46300198BF2 /* ProfilleView.swift in Sources */,
 				6F991D97281F457D00198BF2 /* SideMenuViewModel.swift in Sources */,
 				6F766B4128204E0F00D423C4 /* TextArea.swift in Sources */,
@@ -516,6 +531,7 @@
 				6F991D9B28201EBE00198BF2 /* SideMenuOptionRowView.swift in Sources */,
 				6FCE0C222822FF6C00815E79 /* AuthViewModel.swift in Sources */,
 				6F991D7F281CD18700198BF2 /* ExploreView.swift in Sources */,
+				6FCE0C27282455EE00815E79 /* ImagePicker.swift in Sources */,
 				6F991D79281CD00000198BF2 /* MainTabView.swift in Sources */,
 				6F991D99281F4BB900198BF2 /* UserStatsView.swift in Sources */,
 			);

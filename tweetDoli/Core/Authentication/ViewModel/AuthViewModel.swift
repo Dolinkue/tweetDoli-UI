@@ -11,6 +11,8 @@ import FirebaseAuth
 
 class AuthViewModel: ObservableObject {
     @Published var userSession: FirebaseAuth.User?
+    // esta var es para poder sacar la foto de usuario
+    @Published var didAuthUser = false
     
     init() {
         self.userSession = Auth.auth().currentUser
@@ -43,7 +45,11 @@ class AuthViewModel: ObservableObject {
             }
             
             guard let user = result?.user else {return}
-            self.userSession = user
+            
+            // sacar si no corrijo el error
+            
+       //   self.userSession = user
+            
             
             let data = ["email": email,
                         "userName": usernName.lowercased(),
@@ -54,8 +60,10 @@ class AuthViewModel: ObservableObject {
             Firestore.firestore().collection("Users")
                 .document(user.uid)
                 .setData(data) { _ in
-                    print("user data upload")
+                    // ver por que da error
+                  self.didAuthUser = true
                 }
+            
         }
         
     }

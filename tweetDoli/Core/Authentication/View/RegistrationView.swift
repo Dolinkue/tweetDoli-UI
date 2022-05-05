@@ -12,12 +12,23 @@ struct RegistrationView: View {
     @State private var password = ""
     @State private var userName = ""
     @State private var fullName = ""
-    @Environment(\.presentationMode) var presentationMode
+    @Environment (\.presentationMode) var presentationMode
     @EnvironmentObject var viewModel: AuthViewModel
     
     
     var body: some View {
+        
+        
+        
         VStack{
+            // con esto activamos para sacar la foto de usuario, y cuando completemos nos lleva a sacar la foto
+            
+            
+            NavigationLink(destination: PhotoSelecterView(),
+                           isActive: $viewModel.didAuthUser,
+                           label: {})
+            
+            
             VStack(alignment: .leading){
                 HStack {Spacer()}
                 
