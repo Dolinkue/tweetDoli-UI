@@ -21,8 +21,9 @@ struct tweetDoliApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationView{
-         ContentView()
-        //     PhotoSelecterView()
+                
+        ContentView()
+           
                 
             }
             .environmentObject(viewModel)

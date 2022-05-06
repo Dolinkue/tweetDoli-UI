@@ -13,6 +13,8 @@ class AuthViewModel: ObservableObject {
     @Published var userSession: FirebaseAuth.User?
     // esta var es para poder sacar la foto de usuario
     @Published var didAuthUser = false
+    // se crea un id temporal del user porque el otro se corta hasta que ingresas a la aplicacion y no sirve en este paso
+    private var tempUserSession: FirebaseAuth.User?
     
     init() {
         self.userSession = Auth.auth().currentUser
@@ -45,8 +47,8 @@ class AuthViewModel: ObservableObject {
             }
             
             guard let user = result?.user else {return}
+            self.tempUserSession = user
             
-            // sacar si no corrijo el error
             
        //   self.userSession = user
             
@@ -60,7 +62,7 @@ class AuthViewModel: ObservableObject {
             Firestore.firestore().collection("Users")
                 .document(user.uid)
                 .setData(data) { _ in
-                    // ver por que da error
+            
                   self.didAuthUser = true
                 }
             
@@ -75,5 +77,22 @@ class AuthViewModel: ObservableObject {
         // out on backend/server
         try? Auth.auth().signOut()
     }
+    
+    func uploadProfileImage(_ image: UIImage) {
+        guard let uid = tempUserSession?.uid else {return}
+        
+        
+        // actulizamos ls info de firebase con la foto y la incluimos en la info del usuario
+        ImageUploader.uploadImage(image: image) { profileImageUrl in
+            Firestore.firestore().collection("Users")
+                .document(uid)
+                .updateData(["profileImageUrl": profileImageUrl]) { _ in
+                    self.userSession = self.tempUserSession
+                }
+        }
+        
+        
+    }
+    
     
 }

@@ -13,6 +13,7 @@ struct PhotoSelecterView: View {
     @State  private var selectedImage: UIImage?
     // viene de swiftUI
     @State  private var profileImage: Image?
+    @EnvironmentObject var viewModel: AuthViewModel
 
 
     var body: some View {
@@ -45,27 +46,48 @@ struct PhotoSelecterView: View {
                 if let profileImage = profileImage {
                     profileImage
                         .resizable()
-                        .renderingMode(.template)
                         .frame(width: 180, height: 180)
                         .padding()
                 } else {
-                    Image(systemName: "plus")
-                        .resizable()
-                        .renderingMode(.template)
-                        .frame(width: 180, height: 180)
-                        .padding()
+                        Image(systemName: "plus")
+                            .resizable()
+                            .renderingMode(.template)
+                            .frame(width: 180, height: 180)
+                            .padding()
+                            .background(Color(.systemBlue))
+                            .foregroundColor(.white)
+                    }
                 }
 
-            }
-            .background(Color(.systemBlue))
-            .foregroundColor(.white)
+            
+            
             .clipShape(Circle())
             .padding()
 
             
-            NavigationLink(destination: ImagePicker(selectedImage: $selectedImage),
-                           isActive: $showImagePicker,
-                           label: {})
+//            NavigationLink(destination: ImagePicker(selectedImage: $selectedImage),
+//                           isActive: $showImagePicker,
+//                           label: {})
+            
+            .sheet(isPresented: $showImagePicker, onDismiss: loadImage) {
+                ImagePicker(selectedImage: $selectedImage)
+            }
+            
+            if let selectedImage = selectedImage {
+                Button {
+                    viewModel.uploadProfileImage(selectedImage)
+                } label: {
+                    Text("Continue")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .frame(width: 340, height: 50)
+                        .background(Color(.systemBlue))
+                        .clipShape(Capsule())
+                        .padding()
+                }
+                
+                .shadow(color: .gray.opacity(0.5), radius: 10, x: 0, y: 0)
+            }
             
             
 
@@ -76,6 +98,16 @@ struct PhotoSelecterView: View {
         .ignoresSafeArea()
 
 
+    }
+    // con esta funcion cambiamos la imagen
+    func loadImage() {
+        guard let selectedImage = selectedImage else {
+            return
+        }
+        
+        profileImage = Image(uiImage: selectedImage)
+
+        
     }
 
 }
