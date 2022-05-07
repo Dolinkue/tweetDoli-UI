@@ -13,11 +13,16 @@ class AuthViewModel: ObservableObject {
     @Published var userSession: FirebaseAuth.User?
     // esta var es para poder sacar la foto de usuario
     @Published var didAuthUser = false
+    @Published var currentUser: User1?
     // se crea un id temporal del user porque el otro se corta hasta que ingresas a la aplicacion y no sirve en este paso
     private var tempUserSession: FirebaseAuth.User?
     
+    private let service = UserService()
+    
     init() {
         self.userSession = Auth.auth().currentUser
+        self.fetchUser()
+        
     }
     
     func Login(withEmail email: String, password: String)  {
@@ -92,6 +97,16 @@ class AuthViewModel: ObservableObject {
         }
         
         
+    }
+    
+    func fetchUser() {
+        
+        guard let uid = self.userSession?.uid else {return}
+        
+        // con esta funcion traemos la info de firebase y la pasamos por user
+        service.fetchUser(withUid: uid) { user in
+            self.currentUser = user
+        }
     }
     
     

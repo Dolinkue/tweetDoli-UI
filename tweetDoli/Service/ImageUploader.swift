@@ -22,6 +22,9 @@ struct ImageUploader {
         //nombre en fire storage donde se guarda
         let ref = Storage.storage().reference(withPath: "profile_image/\(filename).jpg")
         
+        
+        
+        
         ref.putData(imageData, metadata: metaDataconfig) { _, error in
             if let error = error {
                 print("image with error\(error.localizedDescription)")

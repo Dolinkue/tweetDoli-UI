@@ -13,49 +13,51 @@ struct SideMenuView: View {
     var body: some View {
         
         
-        VStack (alignment: .leading){
+        if let user = authviewModel.currentUser {
             VStack (alignment: .leading){
-                Circle()
-                    .frame(width: 48, height: 48)
-                VStack (alignment: .leading, spacing: 4){
-                    Text("Nicolas Dolinkue")
-                        .font(.headline)
-                    Text("@batman")
-                        .font(.caption)
-                        .foregroundColor(.gray)
-                }
-                
-                UserStatsView()
-                    .padding(.vertical)
-            }
-            .padding(.leading)
-            
-            ForEach(SideMenuViewmodel.allCases, id: \.rawValue){ viewModel in
-                
-                if viewModel == .profile {
-                    NavigationLink {
-                        ProfilleView()
-                    } label: {
-                        SideMenuOptionRowView(viewModel2: viewModel)
+                VStack (alignment: .leading){
+                    Circle()
+                        .frame(width: 48, height: 48)
+                    VStack (alignment: .leading, spacing: 4){
+                        Text(user.fullName)
+                            .font(.headline)
+                        Text("@\(user.userName)")
+                            .font(.caption)
+                            .foregroundColor(.gray)
                     }
+                    
+                    UserStatsView()
+                        .padding(.vertical)
+                }
+                .padding(.leading)
+                
+                ForEach(SideMenuViewmodel.allCases, id: \.rawValue){ viewModel in
+                    
+                    if viewModel == .profile {
+                        NavigationLink {
+                            ProfilleView()
+                        } label: {
+                            SideMenuOptionRowView(viewModel2: viewModel)
+                        }
 
-                } else if viewModel == .logout {
-                    Button {
-                        authviewModel.sihgnOut()
-                    } label: {
+                    } else if viewModel == .logout {
+                        Button {
+                            authviewModel.sihgnOut()
+                        } label: {
+                            SideMenuOptionRowView (viewModel2: viewModel)
+                        }
+
+                        
+                    } else {
                         SideMenuOptionRowView (viewModel2: viewModel)
                     }
 
-                    
-                } else {
-                    SideMenuOptionRowView (viewModel2: viewModel)
-                }
+               }
+                
 
-           }
-            
-
-            
-            Spacer()
+                
+                Spacer()
+            }
         }
         
         
