@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct SideMenuView: View {
     @EnvironmentObject var authviewModel: AuthViewModel
@@ -16,7 +17,11 @@ struct SideMenuView: View {
         if let user = authviewModel.currentUser {
             VStack (alignment: .leading){
                 VStack (alignment: .leading){
-                    Circle()
+                    // pasamos la imagen para uqe la descargue y presente con Kingfisher
+                    KFImage(URL(string: user.profileImageUrl))
+                        .resizable()
+                        .scaledToFill()
+                        .clipShape(Circle())
                         .frame(width: 48, height: 48)
                     VStack (alignment: .leading, spacing: 4){
                         Text(user.fullName)
@@ -35,7 +40,7 @@ struct SideMenuView: View {
                     
                     if viewModel == .profile {
                         NavigationLink {
-                            ProfilleView()
+                            ProfilleView(user: user)
                         } label: {
                             SideMenuOptionRowView(viewModel2: viewModel)
                         }

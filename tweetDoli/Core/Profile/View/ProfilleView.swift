@@ -6,12 +6,22 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct ProfilleView: View {
     // track selected filter
     @State private var selectionFilter: TweetFilterViewModel = .tweets
     @Environment(\.presentationMode) var mode
     @Namespace var animation
+    
+    // otra forma de traer la imagen del user si iniciar viewModel
+    
+    private let user: User1
+    
+    init(user: User1) {
+        self.user = user
+    }
+    
     
     
     
@@ -32,12 +42,13 @@ struct ProfilleView: View {
             Spacer()
             
         }
+        .navigationBarHidden(true)
     }
 }
 
 struct ProfilleView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfilleView()
+        ProfilleView(user: User1(id: NSUUID().uuidString, userName: "nicodolinkue", fullName: "Nico dolinkue", profileImageUrl: "", email: "nico@me.com"))
     }
 }
 
@@ -57,13 +68,16 @@ extension ProfilleView {
                         .resizable()
                         .frame(width: 20, height: 16)
                         .foregroundColor(.white)
-                        .offset(x: 16, y: 12)
+                        .offset(x: 16, y: -4)
                 }
 
                 
-                Circle()
+                KFImage(URL(string: user.profileImageUrl))
+                    .resizable()
+                    .scaledToFill()
+                    .clipShape(Circle())
                     .frame(width: 72, height: 72)
-                .offset(x: 16, y: 24)
+                    .offset(x: 16, y: 24)
             }
         }
         .frame(height: 96)
@@ -98,13 +112,13 @@ extension ProfilleView {
     var userInfoDetails: some View {
         VStack(alignment: .leading, spacing: 4) {
             HStack {
-                Text("Nico dolinkue")
+                Text(user.fullName)
                     .font(.title2).bold()
                 Image(systemName: "checkmark.seal.fill")
                     .foregroundColor(Color(.systemBlue))
             }
             
-            Text("@nicoDolinkue")
+            Text("@\(user.userName)")
                 .font(.subheadline)
                 .foregroundColor(.gray)
             

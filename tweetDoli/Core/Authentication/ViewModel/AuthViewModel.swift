@@ -36,6 +36,7 @@ class AuthViewModel: ObservableObject {
             
             guard let user = result?.user else {return}
             self.userSession = user
+            self.fetchUser()
             
             
         }
@@ -60,8 +61,9 @@ class AuthViewModel: ObservableObject {
             
             let data = ["email": email,
                         "userName": usernName.lowercased(),
-                        "fullName": fullName,
-                        "uid": user.uid]
+                        "fullName": fullName
+                    //   "uid": user.uid
+            ]
             
             
             Firestore.firestore().collection("Users")
@@ -93,6 +95,7 @@ class AuthViewModel: ObservableObject {
                 .document(uid)
                 .updateData(["profileImageUrl": profileImageUrl]) { _ in
                     self.userSession = self.tempUserSession
+                    self.fetchUser()
                 }
         }
         
