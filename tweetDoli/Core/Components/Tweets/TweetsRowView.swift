@@ -6,35 +6,46 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct TweetsRowView: View {
+    let tweet: Tweet
+    
     var body: some View {
         
         VStack(alignment: .leading) {
-            HStack(alignment: .top, spacing: 12) {
-                Circle()
-                    .frame(width: 56, height: 56)
-                    .foregroundColor(Color(.systemBlue))
-                
-                // user info &tweet caption
-                VStack (alignment: .leading, spacing: 4){
-                    HStack {
-                        Text("Nico Dolinkue")
-                            .font(.subheadline).bold()
-                        Text("@batman")
-                            .foregroundColor(.gray)
-                            .font(.caption)
-                        Text("2W")
-                            .foregroundColor(.gray)
-                            .font(.caption)
+            
+            
+            if let user = tweet.user {
+                HStack(alignment: .top, spacing: 12) {
+                    KFImage(URL(string: user.profileImageUrl))
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 56, height: 56)
+                        .clipShape(Circle())
                         
+                    
+                    // user info &tweet caption
+                    VStack (alignment: .leading, spacing: 4){
+                        HStack {
+                            Text(user.fullName)
+                                .font(.subheadline).bold()
+                            Text("@\(user.userName)")
+                                .foregroundColor(.gray)
+                                .font(.caption)
+                            Text("2W")
+                                .foregroundColor(.gray)
+                                .font(.caption)
+                            
+                        }
+                     
+                        
+                        // tweet caption
+                        
+                        Text(tweet.caption)
+                            .font(.subheadline)
+                            .multilineTextAlignment(.leading)
                     }
-                    
-                    // tweet caption
-                    
-                    Text("Callate perro")
-                        .font(.subheadline)
-                        .multilineTextAlignment(.leading)
                 }
             }
         
@@ -88,8 +99,8 @@ struct TweetsRowView: View {
     }
 }
 
-struct TweetsRowView_Previews: PreviewProvider {
-    static var previews: some View {
-        TweetsRowView()
-    }
-}
+//struct TweetsRowView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        TweetsRowView()
+//    }
+//}

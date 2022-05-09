@@ -13,6 +13,7 @@ struct ProfilleView: View {
     @State private var selectionFilter: TweetFilterViewModel = .tweets
     @Environment(\.presentationMode) var mode
     @Namespace var animation
+    @ObservedObject var viewModel = FeedViewModel()
     
     // otra forma de traer la imagen del user si iniciar viewModel
     
@@ -195,11 +196,11 @@ extension ProfilleView {
     var tweetsView: some View {
         ScrollView {
             LazyVStack {
-                ForEach (0 ... 9, id: \.self) { _ in
-                    
-                    TweetsRowView()
-                        .padding()
-                    
+                ForEach (0 ... 9, id: \.self) { tweet in
+//                    
+//                    TweetsRowView(tweet: tweet)
+//                        .padding()
+//                    
                 }
             }
             
