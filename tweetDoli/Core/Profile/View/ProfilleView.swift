@@ -13,14 +13,16 @@ struct ProfilleView: View {
     @State private var selectionFilter: TweetFilterViewModel = .tweets
     @Environment(\.presentationMode) var mode
     @Namespace var animation
-    @ObservedObject var viewModel = FeedViewModel()
+    //@ObservedObject var viewModel = FeedViewModel()
+    @ObservedObject var viewModel: ProfileViewModel
+    
     
     // otra forma de traer la imagen del user si iniciar viewModel
     
-    private let user: User1
+  //  private let user: User1
     
     init(user: User1) {
-        self.user = user
+        self.viewModel = ProfileViewModel(user: user)
     }
     
     
@@ -73,7 +75,7 @@ extension ProfilleView {
                 }
 
                 
-                KFImage(URL(string: user.profileImageUrl))
+                KFImage(URL(string: viewModel.user.profileImageUrl))
                     .resizable()
                     .scaledToFill()
                     .clipShape(Circle())
@@ -113,13 +115,13 @@ extension ProfilleView {
     var userInfoDetails: some View {
         VStack(alignment: .leading, spacing: 4) {
             HStack {
-                Text(user.fullName)
+                Text(viewModel.user.fullName)
                     .font(.title2).bold()
                 Image(systemName: "checkmark.seal.fill")
                     .foregroundColor(Color(.systemBlue))
             }
             
-            Text("@\(user.userName)")
+            Text("@\(viewModel.user.userName)")
                 .font(.subheadline)
                 .foregroundColor(.gray)
             
@@ -196,11 +198,11 @@ extension ProfilleView {
     var tweetsView: some View {
         ScrollView {
             LazyVStack {
-                ForEach (0 ... 9, id: \.self) { tweet in
-//                    
-//                    TweetsRowView(tweet: tweet)
-//                        .padding()
-//                    
+                ForEach (viewModel.tweets) { tweet in
+                    
+                    TweetsRowView(tweet: tweet)
+                        .padding()
+                    
                 }
             }
             

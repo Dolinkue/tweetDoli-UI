@@ -39,7 +39,8 @@ struct FeedView: View {
             .fullScreenCover(isPresented: $showNewTweetView) {
                 NewTweetView()
             }
-            
+            //para ocultar la barra cuando scroll
+            .navigationBarTitleDisplayMode(.inline)
 
             
             

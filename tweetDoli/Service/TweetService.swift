@@ -38,15 +38,39 @@ struct TweetService {
     
     func fetchTweets(completion: @escaping([Tweet]) -> Void) {
         
-        Firestore.firestore().collection("Tweets").getDocuments { snapshot, _ in
-            guard let documents = snapshot?.documents else {return}
-            
-            let tweets = documents.compactMap ({ try? $0.data(as: Tweet.self) })
-              completion(tweets)
+        Firestore.firestore().collection("Tweets")
+            .order(by: "timestamp", descending: true)
+            .addSnapshotListener { snapshot, _ in
+                guard let documents = snapshot?.documents else {return}
+                
+                let tweets = documents.compactMap ({ try? $0.data(as: Tweet.self) })
+                  completion(tweets)
             
                 
             
         }
+    }
+    
+    
+    func fetchTweetsUser(forUid uid: String, completion: @escaping([Tweet]) -> Void) {
+        
+        
+        Firestore.firestore().collection("Tweets")
+        // aca busca los twees que solo tengan el mismo uid
+            .whereField("uid", isEqualTo: uid)
+            .addSnapshotListener { snapshot, _ in
+                guard let documents = snapshot?.documents else {return}
+                
+                let tweets = documents.compactMap ({ try? $0.data(as: Tweet.self) })
+                completion(tweets.sorted(by: {$0.timestamp.dateValue() > $1.timestamp.dateValue()}))
+            
+                
+            
+        }
+        
+        
+        
+        
     }
     
 }

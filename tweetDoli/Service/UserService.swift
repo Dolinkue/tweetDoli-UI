@@ -17,7 +17,7 @@ struct UserService {
     func fetchUser(withUid uid: String, completion: @escaping(User1) -> Void) {
         Firestore.firestore().collection("Users")
             .document(uid)
-            .getDocument { snapshot, _ in
+            .addSnapshotListener { snapshot, _ in
                 guard let snapshot = snapshot else {return}
                 
                 guard let user2 = try? snapshot.data(as: User1.self) else {return}
@@ -32,7 +32,7 @@ struct UserService {
         var users = [User1]()
         
         Firestore.firestore().collection("Users")
-            .getDocuments { snapshot, _ in
+            .addSnapshotListener { snapshot, _ in
                 guard let documents = snapshot?.documents else {return}
                 // se puede mejorar con compacMap ver despues como funcina
                 documents.forEach { document in
