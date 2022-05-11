@@ -6,6 +6,7 @@
 //
 
 import FirebaseFirestoreSwift
+import Firebase
 
 // con fireSwift lo que se hace es importar el protocolo decorable para firebase
 
@@ -17,6 +18,7 @@ struct User1: Identifiable,Decodable {
     let profileImageUrl: String
     let email: String
     
+    var isCurrentUser: Bool{return Auth.auth().currentUser?.uid == id}
     
 }
 

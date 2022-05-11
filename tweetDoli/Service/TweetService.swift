@@ -73,6 +73,15 @@ struct TweetService {
         
     }
     
+
+    
+    
+}
+
+// MARK: - LIKES
+
+
+extension TweetService {
     func likeTweet(_ tweet: Tweet, completion: @escaping() -> Void) {
         
         guard let uid = Auth.auth().currentUser?.uid else {return}
@@ -123,5 +132,30 @@ struct TweetService {
         
     }
     
+    
+    func fetchLikedTweets (forUid uid: String, completion: @escaping([Tweet]) -> Void) {
+        
+        var tweets = [Tweet]()
+        
+        Firestore.firestore().collection("Users").document(uid).collection("user-likes")
+            .addSnapshotListener { snapshot, _ in
+                // aca traemos todos los likes que hizo el usuario como documentos vacios
+                guard let documets = snapshot?.documents else {return}
+                
+                documets.forEach { doc in
+                    let tweetID = doc.documentID
+                    
+                    Firestore.firestore().collection("Tweets").document(tweetID)
+                        .addSnapshotListener { snapshot, _ in
+                            
+                            
+                            guard let tweet = try? snapshot?.data(as: Tweet.self) else {return}
+                            tweets.append(tweet)
+                            
+                            completion(tweets)
+                        }
+                }
+            }
+    }
     
 }
