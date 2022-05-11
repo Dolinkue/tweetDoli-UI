@@ -9,14 +9,18 @@ import SwiftUI
 import Kingfisher
 
 struct TweetsRowView: View {
-    let tweet: Tweet
+    @ObservedObject var viewModel: TweetRowViewModel
+    
+    init (tweet: Tweet) {
+        self.viewModel = TweetRowViewModel(tweet: tweet)
+    }
     
     var body: some View {
         
         VStack(alignment: .leading) {
             
             
-            if let user = tweet.user {
+            if let user = viewModel.tweet.user {
                 HStack(alignment: .top, spacing: 12) {
                     KFImage(URL(string: user.profileImageUrl))
                         .resizable()
@@ -42,7 +46,7 @@ struct TweetsRowView: View {
                         
                         // tweet caption
                         
-                        Text(tweet.caption)
+                        Text(viewModel.tweet.caption)
                             .font(.subheadline)
                             .multilineTextAlignment(.leading)
                     }
@@ -51,39 +55,48 @@ struct TweetsRowView: View {
         
             // action Buttons
             HStack {
-                Button {
-                    //action
-                } label: {
-                    Image(systemName: "bubble.left")
-                        .font(.subheadline)
-                }
+//                Button {
+//                    //action
+//                } label: {
+//                    Image(systemName: "bubble.left")
+//                        .font(.subheadline)
+//                }
+//
+//                Spacer()
+//
+//                Button {
+//                    //action
+//                } label: {
+//                    Image(systemName: "arrow.2.squarepath")
+//                        .font(.subheadline)
+//                }
                 
                 Spacer()
                 
                 Button {
-                    //action
+                    viewModel.tweet.didLike ?? false ? viewModel.unlikeTweet() :viewModel.likeTweet()
                 } label: {
-                    Image(systemName: "arrow.2.squarepath")
+                    if viewModel.tweet.didLike == true {
+                           Image ( systemName: "heart.fill" )
+
+                            }else {
+                                Image (systemName: "heart")
+                            }
+                        
+                    }
+                    
                         .font(.subheadline)
-                }
+                        .foregroundColor(viewModel.tweet.didLike ?? false ? .red : .gray)
+                
                 
                 Spacer()
                 
-                Button {
-                    //action
-                } label: {
-                    Image(systemName: "heart")
-                        .font(.subheadline)
-                }
-                
-                Spacer()
-                
-                Button {
-                    //action
-                } label: {
-                    Image(systemName: "bookmark")
-                        .font(.subheadline)
-                }
+//                Button {
+//                    //action
+//                } label: {
+//                    Image(systemName: "bookmark")
+//                        .font(.subheadline)
+//                }
 
 
                 

@@ -73,4 +73,55 @@ struct TweetService {
         
     }
     
+    func likeTweet(_ tweet: Tweet, completion: @escaping() -> Void) {
+        
+        guard let uid = Auth.auth().currentUser?.uid else {return}
+        guard let tweetId = tweet.id else {return}
+        
+        // dentro del doc user crea otro doc user-like
+        let userLikesRef = Firestore.firestore().collection("Users")
+            .document(uid).collection("user-likes")
+        
+        Firestore.firestore().collection("Tweets").document(tweetId)
+            .updateData(["likes": tweet.likes + 1]) { _ in
+                userLikesRef.document(tweetId).setData([:]) { _ in
+                    completion()
+                }
+            }
+        
+        
+    }
+    
+    
+    func unlikeTweet (_ tweet: Tweet, completion: @escaping() -> Void) {
+        guard let uid = Auth.auth().currentUser?.uid else {return}
+        guard let tweetId = tweet.id else {return}
+        guard tweet.likes > 0 else {return}
+        let userLikesRef = Firestore.firestore().collection("Users")
+            .document(uid).collection("user-likes")
+        
+        Firestore.firestore().collection("Tweets").document(tweetId)
+            .updateData(["likes": tweet.likes - 1]) { _ in
+                userLikesRef.document(tweetId).delete {_ in
+                    completion()
+                }
+            }
+        
+        
+    }
+    
+    
+    func checkIfUserLikedTweet(_ tweet: Tweet, completion: @escaping(Bool) -> Void) {
+        guard let uid = Auth.auth().currentUser?.uid else {return}
+        guard let tweetId = tweet.id else {return}
+        
+        Firestore.firestore().collection("Users")
+            .document(uid).collection("user-likes").document(tweetId).addSnapshotListener { snapshot, _ in
+                guard let snapshot = snapshot else {return}
+                completion(snapshot.exists)
+            }
+        
+    }
+    
+    
 }

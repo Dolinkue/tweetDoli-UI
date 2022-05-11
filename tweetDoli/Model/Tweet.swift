@@ -17,6 +17,8 @@ struct Tweet: Identifiable, Decodable {
     
     
     var user: User1?
+    var didLike: Bool? = false
+    
     
     
 }
