@@ -10,7 +10,16 @@ import Kingfisher
 
 struct NewTweetView: View {
     
+    @State  var showImagePicker: Bool = false
+    // viene de UIKit
+    @State  private var selectedImage: UIImage?
+    // viene de swiftUI
+    @State  private var profileImage: Image?
+    
+    
+    
     @State private var caption = ""
+   // @State private var tweetImage = ""
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var authViewModel: AuthViewModel
     @ObservedObject var viewModel = UploadTweetViewModel()
@@ -27,8 +36,12 @@ struct NewTweetView: View {
                 
                 Spacer()
                 
+                
+                // ver bug
+                if let selectedImage = selectedImage {
                 Button {
                     viewModel.uploadTweet(withCaption: caption)
+                    authViewModel.uploadImage(selectedImage)
                 } label: {
                     Text("Tweet")
                         .bold()
@@ -37,6 +50,7 @@ struct NewTweetView: View {
                         .background(Color(.systemBlue))
                         .foregroundColor(.white)
                         .clipShape(Capsule())
+                }
                 }
 
             }
@@ -49,19 +63,61 @@ struct NewTweetView: View {
                         .scaledToFill()
                         .clipShape(Circle())
                         .frame(width: 64, height: 64)
-                    
+
                 }
                 
                 TextArea("que pasa amigo", text: $caption)
+                
+
+
+            }
+            
+            Button {
+                
+            } label: {
+                if let profileImage = profileImage {
+                    profileImage
+                        .resizable()
+                        .frame(width: 180, height: 180)
+                        .padding()
+                }
+            }
+            
+            
+            
+            Button  {
+                showImagePicker.toggle()
+            } label: {
+                Image(systemName: "camera")
+                    .resizable()
+                    .renderingMode(.template)
+                    .frame(width: 100, height: 80)
+                    .padding()
+                    
+                    
             }
             .padding()
+            
+            .sheet(isPresented: $showImagePicker, onDismiss: loadImage) {
+                ImagePicker(selectedImage: $selectedImage)
+            }
+            
         }
         .onReceive(viewModel.$didUploadTweet) { success in
             if success {
                 presentationMode.wrappedValue.dismiss()
             }
         }
+
+    }
+    
+    func loadImage() {
+        guard let selectedImage = selectedImage else {
+            return
+        }
         
+        profileImage = Image(uiImage: selectedImage)
+    
     }
 }
 

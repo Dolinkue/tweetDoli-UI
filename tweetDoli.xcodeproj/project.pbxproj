@@ -88,6 +88,7 @@
 		6FED231E2829995D00993E2D /* Tweet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
 		6FED2320282AEB6A00993E2D /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		6FED2324282AF8D000993E2D /* TweetRowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetRowViewModel.swift; sourceTree = "<group>"; };
+		6FED2326282C89E400993E2D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		ACFE6929C5C1E4DC142B76DD /* Pods-tweetDoli.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tweetDoli.debug.xcconfig"; path = "Target Support Files/Pods-tweetDoli/Pods-tweetDoli.debug.xcconfig"; sourceTree = "<group>"; };
 		D5DE71A54A23F621E73F79BC /* Pods_tweetDoli.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tweetDoli.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFD0185C40549008BB044920 /* Pods-tweetDoli.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tweetDoli.release.xcconfig"; path = "Target Support Files/Pods-tweetDoli/Pods-tweetDoli.release.xcconfig"; sourceTree = "<group>"; };
@@ -186,6 +187,7 @@
 		6F991D5B281CB68100198BF2 /* tweetDoli */ = {
 			isa = PBXGroup;
 			children = (
+				6FED2326282C89E400993E2D /* Info.plist */,
 				6FCE0C25282455D200815E79 /* Utils */,
 				6F991D6D281CB6A800198BF2 /* Extensions */,
 				6F991D6C281CB6A500198BF2 /* Model */,
@@ -726,9 +728,10 @@
 				DEVELOPMENT_TEAM = GP4P669DH8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = tweetDoli/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "we need de camera for picture";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -756,9 +759,10 @@
 				DEVELOPMENT_TEAM = GP4P669DH8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = tweetDoli/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "we need de camera for picture";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

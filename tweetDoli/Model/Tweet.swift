@@ -14,6 +14,7 @@ struct Tweet: Identifiable, Decodable {
     let timestamp: Timestamp
     let uid: String
     var likes: Int
+    let tweetImage: String?
     
     
     var user: User1?

@@ -4,9 +4,10 @@
 //
 //  Created by Nicolas Dolinkue on 09/05/2022.
 //
-
+import SwiftUI
 import Firebase
 import Darwin
+import FirebaseAuth
 
 
 struct TweetService {
@@ -17,6 +18,7 @@ struct TweetService {
         
         let data = ["uid": uid,
                     "caption": caption,
+                 //   "tweetImage": tweetImage,
                     "likes": 0,
                     "timestamp": Timestamp(date: Date()) ] as [String : Any]
         
@@ -35,6 +37,11 @@ struct TweetService {
         
         
     }
+    
+    
+    
+    
+    
     
     func fetchTweets(completion: @escaping([Tweet]) -> Void) {
         

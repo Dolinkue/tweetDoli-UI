@@ -102,6 +102,26 @@ class AuthViewModel: ObservableObject {
         
     }
     
+    func uploadImage(_ image: UIImage) {
+        guard let uid = tempUserSession?.uid else {return}
+        
+        
+        // actulizamos ls info de firebase con la foto y la incluimos en la info del usuario
+        ImageUploader.uploadImage(image: image) { profileImageUrl in
+            Firestore.firestore().collection("Tweets")
+                .document(uid)
+                .updateData(["tweetImage": profileImageUrl]) { _ in
+                    self.userSession = self.tempUserSession
+                    self.fetchUser()
+                }
+        }
+        
+        
+    }
+    
+    
+    
+    
     func fetchUser() {
         
         guard let uid = self.userSession?.uid else {return}
