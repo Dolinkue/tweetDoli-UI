@@ -12,8 +12,8 @@ class UploadTweetViewModel: ObservableObject {
     
     let service = TweetService()
     
-    func uploadTweet(withCaption caption: String) {
-        service.uploadTweet(caption: caption) { success in
+    func uploadTweet(withCaption caption: String, tweetImage: String) {
+        service.uploadTweet(caption: caption, tweetImage: tweetImage) { success in
             if success {
                 // cerrar el screen
                 self.didUploadTweet = true

@@ -7,8 +7,12 @@
 
 import SwiftUI
 import Kingfisher
+import TTProgressHUD
 
 struct NewTweetView: View {
+    
+    @State var hudVisible = true
+    @State var hudConfig = TTProgressHUDConfig()
     
     @State  var showImagePicker: Bool = false
     // viene de UIKit
@@ -16,7 +20,7 @@ struct NewTweetView: View {
     // viene de swiftUI
     @State  private var profileImage: Image?
     
-    
+    @State  private var imageTweet2 = ""
     
     @State private var caption = ""
    // @State private var tweetImage = ""
@@ -38,10 +42,12 @@ struct NewTweetView: View {
                 
                 
                 // ver bug
-                if let selectedImage = selectedImage {
+                
                 Button {
-                    viewModel.uploadTweet(withCaption: caption)
-                    authViewModel.uploadImage(selectedImage)
+                    
+                    
+                    viewModel.uploadTweet(withCaption: caption, tweetImage: imageTweet2 ?? "")
+                   
                 } label: {
                     Text("Tweet")
                         .bold()
@@ -51,7 +57,7 @@ struct NewTweetView: View {
                         .foregroundColor(.white)
                         .clipShape(Capsule())
                 }
-                }
+                
 
             }
             .padding()
@@ -100,7 +106,9 @@ struct NewTweetView: View {
             
             .sheet(isPresented: $showImagePicker, onDismiss: loadImage) {
                 ImagePicker(selectedImage: $selectedImage)
+                
             }
+            
             
         }
         .onReceive(viewModel.$didUploadTweet) { success in
@@ -117,12 +125,25 @@ struct NewTweetView: View {
         }
         
         profileImage = Image(uiImage: selectedImage)
+        UpPhotoTweetFirebase.uploadImage(image: selectedImage) { url in
+            imageTweet2 = url
+            TTProgressHUD($hudVisible, config: hudConfig)
+            print(imageTweet2)
+            
+            
+        }
+        
+       
+        
+        
+        
+        
     
     }
 }
 
-struct NewTweetView_Previews: PreviewProvider {
-    static var previews: some View {
-        NewTweetView()
-    }
-}
+//struct NewTweetView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        NewTweetView()
+//    }
+//}

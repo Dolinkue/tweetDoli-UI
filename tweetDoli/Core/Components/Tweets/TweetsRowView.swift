@@ -11,6 +11,7 @@ import Kingfisher
 struct TweetsRowView: View {
     @ObservedObject var viewModel: TweetRowViewModel
     
+    
     init (tweet: Tweet) {
         self.viewModel = TweetRowViewModel(tweet: tweet)
     }
@@ -49,6 +50,16 @@ struct TweetsRowView: View {
                         Text(viewModel.tweet.caption)
                             .font(.subheadline)
                             .multilineTextAlignment(.leading)
+                        
+                        
+                        KFImage(URL(string: viewModel.tweet.tweetImage ?? ""))
+                            .resizable()
+                            .frame(width: 200, height: 200)
+                            .padding()
+                            
+                            
+                        
+                        
                     }
                 }
             }

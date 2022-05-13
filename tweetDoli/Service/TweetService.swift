@@ -12,13 +12,13 @@ import FirebaseAuth
 
 struct TweetService {
     
-    func uploadTweet(caption: String, completion: @escaping(Bool) -> Void) {
+    func uploadTweet(caption: String, tweetImage: String, completion: @escaping(Bool) -> Void) {
         // uid lo vamos a usar para traer la info del que escribio el tweet
         guard let uid = Auth.auth().currentUser?.uid else {return}
         
         let data = ["uid": uid,
                     "caption": caption,
-                 //   "tweetImage": tweetImage,
+                    "tweetImage": tweetImage,
                     "likes": 0,
                     "timestamp": Timestamp(date: Date()) ] as [String : Any]
         
@@ -37,6 +37,8 @@ struct TweetService {
         
         
     }
+    
+    
     
     
     

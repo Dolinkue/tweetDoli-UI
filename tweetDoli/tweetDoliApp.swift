@@ -11,6 +11,7 @@ import Firebase
 @main
 struct tweetDoliApp: App {
     
+    
     @StateObject var viewModel = AuthViewModel()
     
     // inicio de Firebase en swiftUI
