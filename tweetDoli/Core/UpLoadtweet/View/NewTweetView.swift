@@ -7,12 +7,11 @@
 
 import SwiftUI
 import Kingfisher
-import TTProgressHUD
+
+
 
 struct NewTweetView: View {
-    
-    @State var hudVisible = true
-    @State var hudConfig = TTProgressHUDConfig()
+        
     
     @State  var showImagePicker: Bool = false
     // viene de UIKit
@@ -23,7 +22,7 @@ struct NewTweetView: View {
     @State  private var imageTweet2 = ""
     
     @State private var caption = ""
-   // @State private var tweetImage = ""
+  
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var authViewModel: AuthViewModel
     @ObservedObject var viewModel = UploadTweetViewModel()
@@ -41,12 +40,14 @@ struct NewTweetView: View {
                 Spacer()
                 
                 
-                // ver bug
                 
+               
                 Button {
                     
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 6) {
+                        viewModel.uploadTweet(withCaption: caption, tweetImage: imageTweet2 ?? "")
+                    }
                     
-                    viewModel.uploadTweet(withCaption: caption, tweetImage: imageTweet2 ?? "")
                    
                 } label: {
                     Text("Tweet")
@@ -93,6 +94,7 @@ struct NewTweetView: View {
             
             Button  {
                 showImagePicker.toggle()
+                hideKeyboard()
             } label: {
                 Image(systemName: "camera")
                     .resizable()
@@ -107,7 +109,13 @@ struct NewTweetView: View {
             .sheet(isPresented: $showImagePicker, onDismiss: loadImage) {
                 ImagePicker(selectedImage: $selectedImage)
                 
+                
             }
+            .onAppear(perform: {
+               withAnimation(Animation.spring().delay(0.5)) {
+                    
+               }
+            })
             
             
         }
@@ -127,19 +135,17 @@ struct NewTweetView: View {
         profileImage = Image(uiImage: selectedImage)
         UpPhotoTweetFirebase.uploadImage(image: selectedImage) { url in
             imageTweet2 = url
-            TTProgressHUD($hudVisible, config: hudConfig)
+                
             print(imageTweet2)
             
             
         }
-        
-       
-        
-        
-        
-        
     
     }
+    func hideKeyboard() {
+            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+        }
+    
 }
 
 //struct NewTweetView_Previews: PreviewProvider {

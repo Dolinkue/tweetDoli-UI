@@ -15,6 +15,7 @@ struct UpPhotoTweetFirebase {
     
    // var imageTweet: String
     
+    
     static func uploadImage (image: UIImage, completion: @escaping(String) -> Void) {
         guard let imageData = image.jpegData(compressionQuality: 0.2) else {return}
         
@@ -33,8 +34,12 @@ struct UpPhotoTweetFirebase {
                 
                 ref.putData(imageData, metadata: metaDataconfig) { _, error in
                     
+                    
+                    
+                    
                     DispatchQueue.main.async {
                         
+                       
                         
                         
                         if let error = error {
