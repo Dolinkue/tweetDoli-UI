@@ -51,11 +51,16 @@ struct TweetsRowView: View {
                             .font(.subheadline)
                             .multilineTextAlignment(.leading)
                         
+                        if viewModel.tweet.tweetImage == "" {
+                            
+                        } else {
+                            KFImage(URL(string: viewModel.tweet.tweetImage ?? ""))
+                                .resizable()
+                                .frame(width: 200, height: 200)
+                                
+                                
+                        }
                         
-                        KFImage(URL(string: viewModel.tweet.tweetImage ?? ""))
-                            .resizable()
-                            .frame(width: 200, height: 200)
-                            .padding()
                             
                             
                         
