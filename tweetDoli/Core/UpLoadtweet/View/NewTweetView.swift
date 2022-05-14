@@ -7,6 +7,8 @@
 
 import SwiftUI
 import Kingfisher
+import ProgressHUD
+
 
 
 
@@ -43,10 +45,15 @@ struct NewTweetView: View {
                 
                
                 Button {
-                    
+                        
+                    ProgressHUD.animationType = .circleStrokeSpin
+                    ProgressHUD.show()
+
                     DispatchQueue.main.asyncAfter(deadline: .now() + 6) {
-                        viewModel.uploadTweet(withCaption: caption, tweetImage: imageTweet2 ?? "")
-                    }
+                        
+                       viewModel.uploadTweet(withCaption: caption, tweetImage: imageTweet2 )
+                       ProgressHUD.dismiss()
+                 }
                     
                    
                 } label: {
